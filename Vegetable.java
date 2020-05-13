@@ -4,9 +4,19 @@ public class Vegetable extends Ingredient{
 	private int sliceCount;
 	private int sliceWidth;
 	
+	/**
+	 * Creates new instance of Vegetable.
+	 * 
+	 * Uses superclass constructor to handle default Ingredient values,
+	 * adds amount and thickness of slices. Is always vegan and vegetarian.
+	 * 
+	 * @see Ingredient#Ingredient(String, int, float, boolean, boolean, boolean)
+	 * @param sliceCount (int) - Amount of slices to cut Vegetable into
+	 * @param sliceWidth (int) - Thickness of each slice in mm
+	 */
 	public Vegetable(String name, int id, float price, boolean isClassic, 
 				     int sliceCount, int sliceWidth) {
-		super(name, id, price, isClassic, true, true); // Vegetable is always vegan
+		super(name, id, price, isClassic, true, true);
 		this.sliceCount = sliceCount;
 		this.sliceWidth = sliceWidth;
 	}

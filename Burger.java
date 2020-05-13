@@ -3,6 +3,8 @@ import java.util.List;
 
 public class Burger {
 
+	private final int MAX_INGREDIENTS = 12;
+	
 	private List<Ingredient> ingredients;
 	private String name;
 	private float price;
@@ -18,7 +20,11 @@ public class Burger {
 	}
 	
 	public void addIngredient(Ingredient ingredient) {
-		ingredients.add(ingredient);
+		if (ingredients.size() < MAX_INGREDIENTS) {
+			ingredients.add(ingredient);
+		} else {
+			System.out.println("Burger already reached max height!");
+		}
 	}
 	
 	public String getName() {

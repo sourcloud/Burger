@@ -6,6 +6,15 @@ public class Bun extends Ingredient {
 	private int toastingTime;
 	private int height;
 	
+	/**
+	 * Creates new instance of Bun.
+	 * 
+	 * Uses superclass constructor to handle default Ingredient values,
+	 * adds height and toasting time.
+	 * @see Ingredient#Ingredient(String, int, float, boolean, boolean, boolean)
+	 * @param height (int) - Height of the Bun
+	 * @param toastingTime (int) - Time needed to toast the Bun
+	 */
 	public Bun(String name, int id, float price, boolean isClassic, 
 			   boolean isVegetarian, boolean isVegan, int height, int toastingTime) {
 		super(name, id, price, isClassic, isVegetarian, isVegan);

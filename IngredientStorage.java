@@ -1,16 +1,20 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class IngredientStorage {
 
+	
 	private static IngredientStorage storage;	// only instance of IngredientStorage
+	
+	public static enum Type {bun, patty, salad, vegetable, sauce};
 	
 	private Map<Integer, Ingredient> storageItems;
 	
 	// Private constructor avoids Initialization
 	private IngredientStorage() {
 		
-		storageItems = new HashMap<Integer, Ingredient> ();
+		storageItems = new TreeMap<Integer, Ingredient> ();
 		
 		// Default Buns
 		storageItems.put(10, new Bun("Standard Bun", 10, 0.85f, true, true, false, 27, 90));
@@ -45,7 +49,7 @@ public class IngredientStorage {
 	 * Only method capable of creating an instance of IngredientStorage.
 	 * Avoids multiple initialization to make sure there is only one storage.
 	 * 
-	 * @return Instance of IngredientStorage
+	 * @return (IngredientStorage) Instance of IngredientStorage
 	 */
 	public static IngredientStorage getInstance() {
 		if (storage == null) {
@@ -56,10 +60,11 @@ public class IngredientStorage {
 	
 	/**
 	 * This method allows adding ingredients to the storage at runtime.
+	 * 
 	 * Checks if ingredient ID to be added is already in storage
 	 * and adds it if not.
 	 * 
-	 * @param ingredient Ingredient that should be added to the storage.
+	 * @param toAdd (Ingredient) - Ingredient that should be added to the storage.
 	 */
 	public void add(Ingredient toAdd) {
 		int key = toAdd.getId();
@@ -73,7 +78,7 @@ public class IngredientStorage {
 	/**
 	 * Gets and returns Ingredient with given ID.
 	 * 
-	 * @param id ID of Ingredient.
+	 * @param id (int) - ID of Ingredient.
 	 * @see java.util.HashMap#get(Object)
 	 */
 	public Ingredient get(int id) {
@@ -86,6 +91,40 @@ public class IngredientStorage {
 	public void printAll() {
 		for (Ingredient toPrint : storageItems.values()) {
 			System.out.println(toPrint);
+		}
+	}
+	
+	public void printAllOf(Type type) {
+		if (type == Type.bun) {
+			for (Ingredient toPrint : storageItems.values()) {
+				if (toPrint instanceof Bun) {
+					System.out.println(toPrint);
+				}
+			}
+		} else if (type == Type.patty) {
+			for (Ingredient toPrint : storageItems.values()) {
+				if (toPrint instanceof Patty) {
+					System.out.println(toPrint);
+				}
+			}
+		} else if (type == Type.salad) {
+			for (Ingredient toPrint : storageItems.values()) {
+				if (toPrint instanceof Salad) {
+					System.out.println(toPrint);
+				}
+			}
+		} else if (type == Type.vegetable) {
+			for (Ingredient toPrint : storageItems.values()) {
+				if (toPrint instanceof Vegetable) {
+					System.out.println(toPrint);
+				}
+			}
+		} else if (type == Type.sauce) {
+			for (Ingredient toPrint : storageItems.values()) {
+				if (toPrint instanceof Sauce) {
+					System.out.println(toPrint);
+				}
+			}
 		}
 	}
 	
