@@ -1,5 +1,5 @@
 
-public class Vegetable extends Ingredient{
+public class Vegetable extends Ingredient implements HeightChanger, TimeConsumer {
 
 	private int sliceCount;
 	private int sliceWidth;
@@ -22,9 +22,14 @@ public class Vegetable extends Ingredient{
 	}
 	
 	@Override
+	public int getTime() {
+		return sliceCount;
+	}
+	
+	@Override
 	public int prepare() {
 		for (int i = 1; i <= sliceCount; i++) {
-			System.out.printf("Cutting %s slice %d with %d mm.\n", name, i, sliceWidth);
+			System.out.printf("Cut %s slice %d with %d mm.\n", name, i, sliceWidth);
 		}
 		return sliceCount;
 	}

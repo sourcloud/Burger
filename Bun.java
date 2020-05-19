@@ -1,5 +1,5 @@
 
-public class Bun extends Ingredient {
+public class Bun extends Ingredient implements HeightChanger, TimeConsumer {
 	
 	private final float GROWTH_FACTOR = 1.02f;
 
@@ -23,8 +23,13 @@ public class Bun extends Ingredient {
 	}
 	
 	@Override
+	public int getTime() {
+		return toastingTime;
+	}
+	
+	@Override
 	public int prepare() {
-		System.out.printf("Toasting %s for %d minutes and %d seconds.\n", name, (toastingTime / 60), toastingTime % 60);
+		System.out.printf("Toast %s for %d minutes and %d seconds.\n", name, (toastingTime / 60), (toastingTime % 60));
 		return toastingTime;
 	}
 
@@ -33,5 +38,6 @@ public class Bun extends Ingredient {
 		int fullMinutes = toastingTime / 60;
 		return (int) (height * Math.pow(GROWTH_FACTOR, fullMinutes));		
 	}
+
 
 }

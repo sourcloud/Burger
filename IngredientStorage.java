@@ -1,4 +1,3 @@
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -6,8 +5,6 @@ public class IngredientStorage {
 
 	
 	private static IngredientStorage storage;	// only instance of IngredientStorage
-	
-	public static enum Type {bun, patty, salad, vegetable, sauce};
 	
 	private Map<Integer, Ingredient> storageItems;
 	
@@ -79,7 +76,7 @@ public class IngredientStorage {
 	 * Gets and returns Ingredient with given ID.
 	 * 
 	 * @param id (int) - ID of Ingredient.
-	 * @see java.util.HashMap#get(Object)
+	 * @see java.util.TreeMap#get(Object)
 	 */
 	public Ingredient get(int id) {
 		return storageItems.get(id);
@@ -93,40 +90,5 @@ public class IngredientStorage {
 			System.out.println(toPrint);
 		}
 	}
-	
-	public void printAllOf(Type type) {
-		if (type == Type.bun) {
-			for (Ingredient toPrint : storageItems.values()) {
-				if (toPrint instanceof Bun) {
-					System.out.println(toPrint);
-				}
-			}
-		} else if (type == Type.patty) {
-			for (Ingredient toPrint : storageItems.values()) {
-				if (toPrint instanceof Patty) {
-					System.out.println(toPrint);
-				}
-			}
-		} else if (type == Type.salad) {
-			for (Ingredient toPrint : storageItems.values()) {
-				if (toPrint instanceof Salad) {
-					System.out.println(toPrint);
-				}
-			}
-		} else if (type == Type.vegetable) {
-			for (Ingredient toPrint : storageItems.values()) {
-				if (toPrint instanceof Vegetable) {
-					System.out.println(toPrint);
-				}
-			}
-		} else if (type == Type.sauce) {
-			for (Ingredient toPrint : storageItems.values()) {
-				if (toPrint instanceof Sauce) {
-					System.out.println(toPrint);
-				}
-			}
-		}
-	}
-	
-	
+		
 }

@@ -50,22 +50,37 @@ public abstract class Ingredient {
 	/**
 	 * Getter for price.
 	 * 
-	 * @return (float) Price of an Ingredient.
+	 * @return (float) Price of an Ingredient
 	 */
 	public float getPrice() {
 		return price;
 	}
 	
 	/**
-	 * Method to calculate height of an Ingredient.
+	 * Getter for classic property.
 	 * 
-	 * Default height is 0. If concrete ingredients have a height 
-	 * other than 0, this method must be overridden for calculation.
-	 * 
-	 * @return (int) Height of ingredient - which is 0 by default.
+	 * @return (boolean) Classic property
 	 */
-	public int calculateHeight() {
-		return 0;
+	public boolean isClassic() {
+		return isClassic;
+	}
+	
+	/**
+	 * Getter for vegetarian property.
+	 * 
+	 * @return (boolean) Vegetarian property
+	 */
+	public boolean isVegetarian() {
+		return isVegetarian;
+	}
+	
+	/**
+	 * Getter for vegan property.
+	 * 
+	 * @return (boolean) Vegan property
+	 */
+	public boolean isVegan() {
+		return isVegan;
 	}
 	
 	public String toString() {
@@ -76,7 +91,7 @@ public abstract class Ingredient {
 	 * This method prints steps to prepare an Ingredient and returns
 	 * the time needed in seconds.
 	 * 
-	 * @return (int) Time for preparation of an Ingredient.
+	 * @return (int) Time for preparation of an Ingredient
 	 */
 	public abstract int prepare();
 

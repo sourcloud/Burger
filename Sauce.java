@@ -43,7 +43,7 @@ public class Sauce extends Ingredient{
 	
 	@Override
 	public int prepare() {
-		System.out.printf("Shaking %s.\n", name);
+		System.out.printf("Shake %s.\n", name);
 		return 0;
 	}
 

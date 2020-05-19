@@ -15,7 +15,7 @@ public class Salad extends Ingredient{
 	
 	@Override
 	public int prepare() {
-		System.out.printf("Cleaning %s.\n", name);
+		System.out.printf("Clean %s.\n", name);
 		return 0;
 	}
 	

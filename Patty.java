@@ -1,5 +1,5 @@
 
-public class Patty extends Ingredient {
+public class Patty extends Ingredient implements HeightChanger, TimeConsumer {
 	
 	private final float SHRINK_FACTOR = 0.965f;
 	
@@ -22,10 +22,16 @@ public class Patty extends Ingredient {
 		this.height = height;
 		this.cookingTime = cookingTime;
 	}
+	
+	@Override
+	public int getTime() {
+		return cookingTime;
+	}
 
 	@Override
 	public int prepare() {
-		System.out.printf("Grilling each side of %s for %d minutes and %d seconds.\n", name, (cookingTime / 120), (cookingTime % 60));
+		int timePerSide = cookingTime / 2;
+		System.out.printf("Grill each side of %s for %d minutes and %d seconds.\n", name, (timePerSide / 60), (timePerSide % 60));
 		return cookingTime;
 	}
 
