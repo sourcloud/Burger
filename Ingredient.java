@@ -84,7 +84,7 @@ public abstract class Ingredient {
 	}
 	
 	public String toString() {
-		return id + " - " + name + " - " + price;
+		return String.format("%d - %s - %.2f", id, name, price);
 	}
 	
 	/**

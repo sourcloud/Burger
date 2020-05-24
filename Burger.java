@@ -3,13 +3,16 @@ import java.util.List;
 
 public class Burger {
 
-	private final int MAX_INGREDIENTS = 12;
+	public static final int MAX_INGREDIENTS = 12;
 	
 	private List<Ingredient> ingredients;
 	private String name;
 	private float price;
 	private int height;
 	private int timeToCook;
+	private boolean isClassic;
+	private boolean isVegetarian;
+	private boolean isVegan;
 	
 	/**
 	 * Default constructor initializes all attributes to default values.
@@ -20,6 +23,21 @@ public class Burger {
 		price = 0;
 		height = 0;
 		timeToCook = 0;
+		isClassic = true;
+		isVegetarian = true;
+		isVegan = true;
+	}
+	
+	public boolean isClassic() {
+		return isClassic;
+	}
+	
+	public boolean isVegetarian() {
+		return isVegetarian;
+	}
+	
+	public boolean isVegan() {
+		return isVegan;
 	}
 	
 	/**
@@ -36,29 +54,49 @@ public class Burger {
 	 * @param toAdd (Ingredient) Ingredient to add to the Burger.
 	 */
 	public void addIngredient(Ingredient toAdd) {
+		
+		boolean addingBun = (toAdd instanceof Bun);
+		boolean addingLast = (ingredients.size() >= MAX_INGREDIENTS - 1);
+		boolean alreadyMaxed = (ingredients.size() >= MAX_INGREDIENTS);
+		boolean alreadyHasBun = hasBun();
 
 		if (toAdd == null) {
 			System.out.println("You cannot add nothing!");
 			
-		} else if (ingredients.size() >= MAX_INGREDIENTS) {
-			System.out.println("Burger already reached max height!");
+		} else if (alreadyMaxed) {
+			System.out.println("Burger already reached max ingredients!");
 			
-		} else if (toAdd instanceof Bun && hasBun()) {
+		} else if (addingBun && alreadyHasBun) {
 			System.out.println("You cannot add a second bun.");
 			
-		} else if (ingredients.size() == MAX_INGREDIENTS - 1 && !hasBun() && !(toAdd instanceof Bun)) {
+		} else if (addingLast && !alreadyHasBun && !addingBun) {
 			System.out.println("A Burger needs a bun. Please add it now!");
 			
 		} else {
 			ingredients.add(toAdd);
 			this.price += toAdd.price;
+			
+			
 			if (toAdd instanceof HeightChanger) {
 				HeightChanger h = (HeightChanger) toAdd;
 				this.height += h.calculateHeight();
 			}
+			
 			if (toAdd instanceof TimeConsumer) {
 				TimeConsumer t = (TimeConsumer) toAdd;
 				this.timeToCook += t.getTime();
+			}
+			
+			if (isClassic && !toAdd.isClassic()) {
+				isClassic = false;
+			}
+			
+			if (isVegan && !toAdd.isVegan()) {
+				isVegan = false;
+			}
+			
+			if (isVegetarian && !(toAdd.isVegetarian() || toAdd.isVegan())) {
+				isVegetarian = false;
 			}
 		}
 	}
@@ -117,7 +155,7 @@ public class Burger {
 			toPrepare.prepare();
 	}
 	
-	private boolean hasBun() {
+	public boolean hasBun() {
 		if (!isEmpty())
 			for (Ingredient toCheck : ingredients)
 				if (toCheck instanceof Bun) 

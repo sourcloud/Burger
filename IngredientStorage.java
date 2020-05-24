@@ -14,32 +14,32 @@ public class IngredientStorage {
 		storageItems = new TreeMap<Integer, Ingredient> ();
 		
 		// Default Buns
-		storageItems.put(10, new Bun("Standard Bun", 10, 0.85f, true, true, false, 27, 90));
-		storageItems.put(11, new Bun("Sesame Bun", 11, 0.95f, true, true, false, 28, 90));
-		storageItems.put(12, new Bun("Vegan Bun", 12, 0.55f, false, true, true, 34, 240));
-		storageItems.put(13, new Bun("Ciabatta", 13, 0.45f, false, true, false, 41, 330));	
+		add(new Bun("Standard Bun", 10, 0.85f, true, true, false, 27, 90));
+		add(new Bun("Sesame Bun", 11, 0.95f, true, true, false, 28, 90));
+		add(new Bun("Vegan Bun", 12, 0.55f, false, true, true, 34, 240));
+		add(new Bun("Ciabatta", 13, 0.45f, false, true, false, 41, 330));	
 		
 		// Default Patties
-		storageItems.put(20, new Patty("Standard Patty", 20, 1.85f, true, false, false, 25, 270));
-		storageItems.put(21, new Patty("Grilled Chicken Patty", 21, 1.15f, false, false, false, 11, 180));
-		storageItems.put(22, new Patty("Falafel Patty", 22, 1.45f, false, true, true, 21, 210));
-		storageItems.put(23, new Patty("Veggie Patty", 23, 1.75f, false, true, false, 25, 240));
+		add(new Patty("Standard Patty", 20, 1.85f, true, false, false, 25, 270));
+		add(new Patty("Grilled Chicken Patty", 21, 1.15f, false, false, false, 11, 180));
+		add(new Patty("Falafel Patty", 22, 1.45f, false, true, true, 21, 210));
+		add(new Patty("Veggie Patty", 23, 1.75f, false, true, false, 25, 240));
 		
 		// Default Salads
-		storageItems.put(30, new Salad("Iceberg Salad", 30, 0.18f, true));
-		storageItems.put(31, new Salad("Arugula Salad", 31, 0.25f, false));
+		add(new Salad("Iceberg Salad", 30, 0.18f, true));
+		add(new Salad("Arugula Salad", 31, 0.25f, false));
 		
 		// Default Vegetables
-		storageItems.put(40, new Vegetable("Tomato", 40, 0.25f, true, 3, 3));
-		storageItems.put(41, new Vegetable("Pickle", 41, 0.15f, true, 4, 2));
-		storageItems.put(42, new Vegetable("Red Onion", 42, 0.08f, false, 5, 2));
-		storageItems.put(43, new Vegetable("Jalapeno", 43, 0.08f, false, 5, 2));
+		add(new Vegetable("Tomato", 40, 0.25f, true, 3, 3));
+		add(new Vegetable("Pickle", 41, 0.15f, true, 4, 2));
+		add(new Vegetable("Red Onion", 42, 0.08f, false, 5, 2));
+		add(new Vegetable("Jalapeno", 43, 0.08f, false, 5, 2));
 		
 		// Default Sauces
-		storageItems.put(50, new Sauce("Ketchup", 50, 0.10f, true, true, true, 5, Sauce.Flavor.normal));
-		storageItems.put(51, new Sauce("Sandwich Sauce", 51, 0.15f, true, true, false, 10, Sauce.Flavor.normal));
-		storageItems.put(52, new Sauce("Chili Sauce", 52, 0.25f, false, true, true, 8, Sauce.Flavor.hot));
-		storageItems.put(53, new Sauce("Honey Mustard Sauce", 54, 0.18f, false, true, false, 8, Sauce.Flavor.sweet));
+		add(new Sauce("Ketchup", 50, 0.10f, true, true, true, 5, Sauce.Flavor.normal));
+		add(new Sauce("Sandwich Sauce", 51, 0.15f, true, true, false, 10, Sauce.Flavor.normal));
+		add(new Sauce("Chili Sauce", 52, 0.25f, false, true, true, 8, Sauce.Flavor.hot));
+		add(new Sauce("Honey Mustard Sauce", 53, 0.18f, false, true, false, 8, Sauce.Flavor.sweet));
 	}
 	
 	/**
@@ -65,7 +65,8 @@ public class IngredientStorage {
 	 */
 	public void add(Ingredient toAdd) {
 		int key = toAdd.getId();
-		if (!storageItems.containsKey(key)) {
+		boolean keyOccupied = storageItems.containsKey(key); 
+		if (!keyOccupied) {
 			storageItems.put(key, toAdd);
 		} else {
 			System.out.println("Ingredient ID already exists in Storage!");
