@@ -1,4 +1,8 @@
-
+/**
+ * This class represents a Bun. A Bun is an ingredient that takes time to
+ * prepare and influences height of a Burger. 
+ *
+ */
 public class Bun extends Ingredient implements HeightChanger, TimeConsumer {
 	
 	private final float GROWTH_FACTOR = 1.02f;
@@ -29,7 +33,10 @@ public class Bun extends Ingredient implements HeightChanger, TimeConsumer {
 	
 	@Override
 	public int prepare() {
-		System.out.printf("Toast %s for %d minutes and %d seconds.\n", name, (toastingTime / 60), (toastingTime % 60));
+		int minutes = toastingTime / 60;
+		int seconds = toastingTime % 60;
+		System.out.printf("Toast %s for %d minutes and %d seconds.\n", name, 
+				minutes, seconds);
 		return toastingTime;
 	}
 

@@ -1,4 +1,8 @@
-
+/**
+ * This class represents a vegetable. A vegetable is an ingredient that takes
+ * time to prepare and influences height of a burger.
+ *
+ */
 public class Vegetable extends Ingredient implements HeightChanger, TimeConsumer {
 
 	private int sliceCount;

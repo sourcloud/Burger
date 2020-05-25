@@ -1,4 +1,8 @@
-
+/**
+ * This class represents a patty. A patty is an ingredient that takes time to
+ * prepare and influences height of a burger.
+ *
+ */
 public class Patty extends Ingredient implements HeightChanger, TimeConsumer {
 	
 	private final float SHRINK_FACTOR = 0.965f;
@@ -31,7 +35,10 @@ public class Patty extends Ingredient implements HeightChanger, TimeConsumer {
 	@Override
 	public int prepare() {
 		int timePerSide = cookingTime / 2;
-		System.out.printf("Grill each side of %s for %d minutes and %d seconds.\n", name, (timePerSide / 60), (timePerSide % 60));
+		int minutes = timePerSide / 60;
+		int seconds = timePerSide % 60;
+		System.out.printf("Grill each side of %s for %d minutes and %d seconds.\n", 
+				name, minutes, seconds);
 		return cookingTime;
 	}
 

@@ -1,5 +1,8 @@
-
-public class Sauce extends Ingredient{
+/**
+ * This class represents sauce. Sauce is an ingredient that has a flavor.
+ *
+ */
+public class Sauce extends Ingredient {
 
 	public static enum Flavor {normal, hot, sweet};
 	

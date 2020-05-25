@@ -1,4 +1,6 @@
-
+/**
+ * This class only contains the main method to run the application.
+ */
 public class Main {
 
 	public static void main(String[] args) {
@@ -11,6 +13,7 @@ public class Main {
 		while (!c.quitWanted()) {
 			c.getAndInterpretUserInput();
 		}
+		System.out.println("Application finished!");
 
 	}
 }

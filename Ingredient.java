@@ -1,4 +1,10 @@
-
+/**
+ * This abstract class describes requirements for an ingredient of a burger.
+ * Must have id, name, price and information about being classic, vegetarian
+ * and vegan.
+ * 
+ * Each subclass must implement a prepare() method.
+ */
 public abstract class Ingredient {
 	
 	protected int id;
@@ -83,6 +89,7 @@ public abstract class Ingredient {
 		return isVegan;
 	}
 	
+	@Override
 	public String toString() {
 		return String.format("%d - %s - %.2f", id, name, price);
 	}

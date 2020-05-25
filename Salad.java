@@ -1,4 +1,6 @@
-
+/**
+ * This class represents Salad. Salad is an ingredient.
+ */
 public class Salad extends Ingredient{
 
 	/**

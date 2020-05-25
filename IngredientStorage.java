@@ -1,10 +1,16 @@
 import java.util.Map;
 import java.util.TreeMap;
 
-public class IngredientStorage {
 
+/**
+ * This class manages ingredients to put on a burger. Ingredients can be 
+ * accessed by their ID and new ingredients can be added.
+ *
+ */
+public class IngredientStorage {
 	
-	private static IngredientStorage storage;	// only instance of IngredientStorage
+	// only instance of IngredientStorage
+	private static IngredientStorage storage; 
 	
 	private Map<Integer, Ingredient> storageItems;
 	
@@ -36,10 +42,14 @@ public class IngredientStorage {
 		add(new Vegetable("Jalapeno", 43, 0.08f, false, 5, 2));
 		
 		// Default Sauces
-		add(new Sauce("Ketchup", 50, 0.10f, true, true, true, 5, Sauce.Flavor.normal));
-		add(new Sauce("Sandwich Sauce", 51, 0.15f, true, true, false, 10, Sauce.Flavor.normal));
-		add(new Sauce("Chili Sauce", 52, 0.25f, false, true, true, 8, Sauce.Flavor.hot));
-		add(new Sauce("Honey Mustard Sauce", 53, 0.18f, false, true, false, 8, Sauce.Flavor.sweet));
+		add(new Sauce("Ketchup", 50, 0.10f, true, true, true, 5, 
+				Sauce.Flavor.normal));
+		add(new Sauce("Sandwich Sauce", 51, 0.15f, true, true, false, 10, 
+				Sauce.Flavor.normal));
+		add(new Sauce("Chili Sauce", 52, 0.25f, false, true, true, 8, 
+				Sauce.Flavor.hot));
+		add(new Sauce("Honey Mustard Sauce", 53, 0.18f, false, true, false, 8, 
+				Sauce.Flavor.sweet));
 	}
 	
 	/**
@@ -61,7 +71,7 @@ public class IngredientStorage {
 	 * Checks if ingredient ID to be added is already in storage
 	 * and adds it if not.
 	 * 
-	 * @param toAdd (Ingredient) - Ingredient that should be added to the storage.
+	 * @param toAdd (Ingredient) - Ingredient that should be added to the storage
 	 */
 	public void add(Ingredient toAdd) {
 		int key = toAdd.getId();
