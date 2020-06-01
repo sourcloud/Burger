@@ -6,13 +6,12 @@ public class Salad extends Ingredient{
 	/**
 	 * Creates new instance of Salad.
 	 * 
-	 * Uses superclass constructor to handle default Ingredient values,
-	 * but is always vegetarian and vegan.
+	 * Uses superclass constructor to handle default Ingredient values.
 	 *  
-	 * @see Ingredient#Ingredient(String, int, float, boolean, boolean, boolean)
+	 * @see Ingredient#Ingredient(String, int, float, Type[])
 	 */
-	public Salad(String name, int id, float price, boolean isClassic) {
-		super(name, id, price, isClassic, true, true);
+	public Salad(String name, int id, float price, Type[] types) {
+		super(name, id, price, types);
 	}
 	
 	@Override

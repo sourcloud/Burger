@@ -15,19 +15,19 @@ public class Bun extends Ingredient implements HeightChanger, TimeConsumer {
 	 * 
 	 * Uses superclass constructor to handle default Ingredient values,
 	 * adds height and toasting time.
-	 * @see Ingredient#Ingredient(String, int, float, boolean, boolean, boolean)
+	 * @see Ingredient#Ingredient(String, int, float, Type[])
 	 * @param height (int) - Height of the Bun
 	 * @param toastingTime (int) - Time needed to toast the Bun
 	 */
-	public Bun(String name, int id, float price, boolean isClassic, 
-			   boolean isVegetarian, boolean isVegan, int height, int toastingTime) {
-		super(name, id, price, isClassic, isVegetarian, isVegan);
+	public Bun(String name, int id, float price, Type[] types, 
+			   int height, int toastingTime) {
+		super(name, id, price, types);
 		this.height = height;
 		this.toastingTime = toastingTime;
 	}
 	
 	@Override
-	public int getTime() {
+	public int getTimeConsumed() {
 		return toastingTime;
 	}
 	

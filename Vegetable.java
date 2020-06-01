@@ -12,21 +12,21 @@ public class Vegetable extends Ingredient implements HeightChanger, TimeConsumer
 	 * Creates new instance of Vegetable.
 	 * 
 	 * Uses superclass constructor to handle default Ingredient values,
-	 * adds amount and thickness of slices. Is always vegan and vegetarian.
+	 * adds amount and thickness of slices.
 	 * 
-	 * @see Ingredient#Ingredient(String, int, float, boolean, boolean, boolean)
+	 * @see Ingredient#Ingredient(String, int, float, Type[])
 	 * @param sliceCount (int) - Amount of slices to cut Vegetable into
 	 * @param sliceWidth (int) - Thickness of each slice in mm
 	 */
-	public Vegetable(String name, int id, float price, boolean isClassic, 
+	public Vegetable(String name, int id, float price, Type[] types, 
 				     int sliceCount, int sliceWidth) {
-		super(name, id, price, isClassic, true, true);
+		super(name, id, price, types);
 		this.sliceCount = sliceCount;
 		this.sliceWidth = sliceWidth;
 	}
 	
 	@Override
-	public int getTime() {
+	public int getTimeConsumed() {
 		return sliceCount;
 	}
 	

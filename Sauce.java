@@ -15,24 +15,25 @@ public class Sauce extends Ingredient {
 	 * Uses superclass constructor to handle default Ingredient values,
 	 * adds amount and flavor.
 	 * 
-	 * @see Ingredient#Ingredient(String, int, float, boolean, boolean, boolean)
+	 * @see Ingredient#Ingredient(String, int, float, Type[])
 	 * @param amount (int) - Amount of sauce to be produced in ml
 	 * @param flavor (Flavor) - Flavor of the sauce.
 	 */
-	public Sauce(String name, int id, float price, boolean isClassic, 
-				 boolean isVegetarian, boolean isVegan, int amount, Flavor flavor) {
-		super(name, id, price, isClassic, isVegetarian, isVegan);
+	public Sauce(String name, int id, float price, Type[] types, 
+				 int amount, Flavor flavor) {
+		super(name, id, price, types);
 		this.amount = amount;
 		this.flavor = flavor;
 	}
 	
 	/**
-	 * Getter for flavor name.
+	 * Getter for flavor.
 	 * 
-	 * @return (String) Name of flavor
+	 * @return (Flavor) Flavor of sauce
 	 */
-	public String getFlavorName() {
-		return flavor.name();
+	
+	public Flavor getFlavor() {
+		return flavor;
 	}
 	
 	/**

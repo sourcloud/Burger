@@ -234,6 +234,7 @@ public class Controller {
 						burgerInCreation.addIngredient(toAdd);
 					}
 				} catch (NumberFormatException e) {
+					System.out.println(e.getMessage());
 					System.out.printf("Ignored argument '%s' ", number);
 					System.out.print("because it is not a number!\n");
 				}
@@ -295,11 +296,24 @@ public class Controller {
 	 * Summarizes every commited burger and sets quit status to true.
 	 */
 	private void finishCompetition() {
+		
+		int timeSum = 0;
+		float priceSum = 0;
+		
 		System.out.println("Finished!");
 		System.out.println("You commited following recipes: ");
+		
 		for (Burger burger : commitedBurgers) {
-			printSummary(burger);
+			burger.printSummary();
+			timeSum += burger.calculateTime();
+			priceSum += burger.calculatePrice();
 		}
+		
+		int minutes = timeSum / 60;
+		int seconds = timeSum % 60;
+		System.out.printf("Total time needed: %d minute(s) and %d seconds\n", minutes, seconds);
+		System.out.printf("Total price: %.2f EUR\n", priceSum);
+		
 		quitWanted = true;
 	}
 	
@@ -314,14 +328,18 @@ public class Controller {
 		boolean burgerHasBun = burgerInCreation.hasBun();
 		boolean nameExists = (burgerName != null);
 		boolean nameNotEmpty = (!burgerName.isBlank());
+
 		if (!(nameExists && nameNotEmpty)) {
 			System.out.println("Please name your burger first");
 			return false;
+			
 		} else if (!burgerHasBun) {
 			System.out.println("Please add a bun first!");
 			return false;
+			
+		} else {
+			return true;
 		}
-		return true;
 	}
 
 	/**
@@ -330,44 +348,6 @@ public class Controller {
 	private void printCurrentBurger() {
 		System.out.println("Your current burger: ");
 		System.out.println(burgerInCreation);
-	}
-
-	/**
-	 * Prints summary of a Burger to console.
-	 * 
-	 * @param toSummarize (Burger) Burger to summarize
-	 */
-	private void printSummary(Burger toSummarize) {
-		String burgerName = toSummarize.getName();
-		float burgerPrice = toSummarize.calculatePrice();
-		int burgerHeight = toSummarize.calculateHeight();
-		int burgerTime = toSummarize.calculateTime();
-		int minutes = burgerTime / 60;
-		int seconds = burgerTime % 60;
-		
-		String classicString = toSummarize.determineClassic() ? " classic" : "";
-		String veggieString = "";
-		
-		if (toSummarize.determineVegan()) {
-			veggieString = " vegan";
-		} else if (toSummarize.determineVegetarian()) {
-			veggieString = " vegetarian";
-		}
-		
-		System.out.println();
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		System.out.printf("This is your recipe for %s:\n", burgerName);
-		System.out.println("-----------------------------");
-		toSummarize.printRecipe();
-		System.out.println("-----------------------------");
-		System.out.printf("It takes %d minute(s) and %d seconds to prepare\n", minutes, seconds);
-		System.out.printf("and will be %d mm high!\n", burgerHeight);
-		System.out.println("-----------------------------");
-		System.out.printf("It costs %.2f EUR.\n", burgerPrice);
-		System.out.println("-----------------------------");
-		System.out.println("You'll get a" + veggieString + classicString + " Burger!");
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		System.out.println();
 	}
 
 }

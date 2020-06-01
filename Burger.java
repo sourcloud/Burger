@@ -98,7 +98,7 @@ public class Burger {
 			for (Ingredient ingredient : ingredientList) {
 				if (ingredient instanceof TimeConsumer) {
 					TimeConsumer t = (TimeConsumer) ingredient;
-					time += t.getTime();
+					time += t.getTimeConsumed();
 				}
 			}
 		}
@@ -106,85 +106,87 @@ public class Burger {
 	}
 	
 	/**
-	 * Determines if burger is classic by evaluating classic property of
-	 * each individual ingredient.
+	 * Determines if burger is classic, vegetarian or vegan based on its
+	 * ingredients by checking their types.
 	 * 
-	 * @return (boolean) True if each ingredient is classic, false else.
-	 */
-	public boolean determineClassic() {
-		
-		if (!ingredientListExistsAndIsNotEmpty()) {
-			return false;
-					
-		} else {
-			for (Ingredient ingredient : ingredientList) {
-				if (!ingredient.isClassic()) {
-					return false;
-				}
-			}
-			return true;
-		}
-	}
-	
-	/**
-	 * Determines if burger is vegetarian by evaluating vegetarian property of
-	 * each individual ingredient.
+	 * A burger is classic / vegetarian / vegan if all ingredients are.
 	 * 
-	 * @return (boolean) True if each ingredient is vegetarian, false else.
+	 * Wraps burger type in string and returns it.
+	 *  
+	 * @return (String) Description of burger type.
 	 */
-	public boolean determineVegetarian() {
+	public String getTypeSummary() {
 		
-		if (!ingredientListExistsAndIsNotEmpty()) {
-			return false;
+		// initialized booleans can switch to opposite, never switch back
+		boolean isClassic = true;
+		boolean isVegan = true;
+		boolean	isVegetarian = true;
+		
+		for (Ingredient ingredient : ingredientList) {
 			
-		} else {
-			for (Ingredient ingredient : ingredientList) {
-				if (!ingredient.isVegetarian()) {
-					return false;
-				}
-			}
-			return true;	
-		}
-	}
-	
-	/**
-	 * Determines if burger is vegan by evaluating vegan property of
-	 * each individual ingredient.
-	 * 
-	 * @return (boolean) True if each ingredient is vegan, false else.
-	 */
-	public boolean determineVegan() {
-		
-		if (ingredientListExistsAndIsNotEmpty()) {
-			return false;
+			// see above
+			boolean containsClassic = false;
+			boolean containsVegan = false;
+			boolean containsVegetarian = false;
 			
-		} else {
-			for (Ingredient ingredient : ingredientList) {
-				if (!ingredient.isVegan()) {
-					return false;
+			for (Ingredient.Type type : ingredient.getTypes()) {
+				
+				if (type == Ingredient.Type.classic) {
+					containsClassic = true;
+				} else if (type == Ingredient.Type.vegan) {
+					containsVegan = true;
+				} else if (type == Ingredient.Type.vegetarian) {
+					containsVegetarian = true;
 				}
 			}
-			return true;
+			
+			if (!containsClassic) {
+				isClassic = false;
+			}
+			
+			if (!containsVegan) {
+				isVegan = false;
+			}
+			
+			// vegan is always vegetarian
+			if (!containsVegetarian && !containsVegan) {
+				isVegetarian = false;
+			}		
 		}
+		
+		String classicString = (isClassic) ? "classic " : "";
+		String veggieString = (isVegan) ? "vegan" : (isVegetarian) ? "vegetarian" : "";
+		
+		return classicString + veggieString;
 	}
 	
 	/**
-	 * Determines flavors of the burger by evaluating flavor of each sauce.
+	 * Determines flavor of a burger based on the flavor of its sauces.
 	 * 
-	 * @return (List<String>) List of flavor names.
+	 * Checks all ingredients and if they are sauce, checks their flavor.
+	 * If sauce has an special taste, adds it to description.
+	 * 
+	 * @return (String) Description of burger flavor.
 	 */
-	public List<String> determineFlavors() {
-		List<String> flavors = new ArrayList<String>();
-		if (ingredientListExistsAndIsNotEmpty()) {
-			for (Ingredient ingredient : ingredientList) {
-				if (ingredient instanceof Sauce) {
-					Sauce s = (Sauce) ingredient;
-					String flavorName = s.getFlavorName();
-					flavors.add(flavorName);
+	
+	public String getFlavorSummary() {
+		
+		String flavorSummary = "";
+		
+		for (Ingredient ingredient: ingredientList) {
+			if (ingredient instanceof Sauce) {
+				Sauce s = (Sauce) ingredient;
+				Sauce.Flavor flavor = s.getFlavor();
+				if (flavor != Sauce.Flavor.normal 
+					&& !flavorSummary.contains(flavor.name())) {
+					if (!flavorSummary.isBlank()) {
+						flavorSummary += " and ";
+					}
+					flavorSummary += flavor.name();
 				}
 			}
 		}
-		return flavors;
+		return flavorSummary;
 	}
 	
 	/**
@@ -229,6 +231,42 @@ public class Burger {
 		if (ingredientListExistsAndIsNotEmpty())
 			for (Ingredient toPrepare : ingredientList)
 				toPrepare.prepare();
+	}
+	
+	/**
+	 * Prints summary to console.
+	 */
+	public void printSummary() {
+		
+		float price = calculatePrice();
+		int height = calculateHeight();
+		int time = calculateTime();
+		
+		int minutes = time / 60;
+		int seconds = time % 60;
+		
+		String typeSummary = getTypeSummary();
+		String flavorSummary = getFlavorSummary();
+		
+		System.out.println();
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.printf("This is your recipe for %s:\n", name);
+		System.out.println("-----------------------------");
+		printRecipe();
+		System.out.println("-----------------------------");
+		System.out.printf("It takes %d minute(s) and %d seconds to prepare\n", minutes, seconds);
+		System.out.printf("and will be %d mm high!\n", height);
+		System.out.println("-----------------------------");
+		System.out.printf("It costs %.2f EUR.\n", price);
+		System.out.println("-----------------------------");
+		if (!typeSummary.isBlank()) {			
+			System.out.printf("You'll get a %s Burger!\n", typeSummary);
+		}
+		if (!flavorSummary.isBlank()) {
+			System.out.printf("It will taste %s!\n", flavorSummary);
+		}
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println();
 	}
 	
 	/**

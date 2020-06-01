@@ -7,12 +7,12 @@
  */
 public abstract class Ingredient {
 	
-	protected int id;
+	public static enum Type {classic, none, vegan, vegetarian};
+	
 	protected String name;
+	protected Type[] types;
 	protected float price;
-	protected boolean isClassic;
-	protected boolean isVegetarian;
-	protected boolean isVegan;
+	protected int id;
 	
 	/**
 	 * Superclass constructor that can be used by classes inheriting
@@ -21,18 +21,13 @@ public abstract class Ingredient {
 	 * @param name (String) - Name of the Ingredient
 	 * @param id (int) - Identifier of the Ingredient
 	 * @param price (float) - Price of the Ingredient
-	 * @param isClassic (boolean) - tells if it's a classic Ingredient
-	 * @param isVegetarian (boolean) - tells if it's a vegetarian Ingredient
-	 * @param isVegan (boolean) - tells if it's a vegan Ingredient
+	 * @param types (Type[]) - Types of the Ingredient
 	 */
-	public Ingredient(String name, int id, float price, boolean isClassic, 
-			   		  boolean isVegetarian, boolean isVegan) {
+	public Ingredient(String name, int id, float price, Type[] types) {
 		this.name = name;
 		this.id = id;
 		this.price = price;
-		this.isClassic = isClassic;
-		this.isVegetarian = isVegetarian;
-		this.isVegan = isVegan;
+		this.types = types;
 	}
 	
 	/**
@@ -63,30 +58,12 @@ public abstract class Ingredient {
 	}
 	
 	/**
-	 * Getter for classic property.
+	 * Getter for types.
 	 * 
-	 * @return (boolean) Classic property
+	 * @return (Type[]) Types of an Ingredient
 	 */
-	public boolean isClassic() {
-		return isClassic;
-	}
-	
-	/**
-	 * Getter for vegetarian property.
-	 * 
-	 * @return (boolean) Vegetarian property
-	 */
-	public boolean isVegetarian() {
-		return isVegetarian;
-	}
-	
-	/**
-	 * Getter for vegan property.
-	 * 
-	 * @return (boolean) Vegan property
-	 */
-	public boolean isVegan() {
-		return isVegan;
+	public Type[] getTypes() {
+		return types;
 	}
 	
 	@Override

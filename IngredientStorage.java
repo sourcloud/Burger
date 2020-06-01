@@ -19,37 +19,46 @@ public class IngredientStorage {
 		
 		storageItems = new TreeMap<Integer, Ingredient> ();
 		
+		Ingredient.Type[] classic = {Ingredient.Type.classic};
+		Ingredient.Type[] classicVegan = {Ingredient.Type.classic, 
+										  Ingredient.Type.vegan};
+		Ingredient.Type[] classicVegetarian = {Ingredient.Type.classic, 
+											   Ingredient.Type.vegetarian};
+		Ingredient.Type[] none = {Ingredient.Type.none};
+		Ingredient.Type[] vegan = {Ingredient.Type.vegan};
+		Ingredient.Type[] vegetarian = {Ingredient.Type.vegetarian};
+		
+		
 		// Default Buns
-		add(new Bun("Standard Bun", 10, 0.85f, true, true, false, 27, 90));
-		add(new Bun("Sesame Bun", 11, 0.95f, true, true, false, 28, 90));
-		add(new Bun("Vegan Bun", 12, 0.55f, false, true, true, 34, 240));
-		add(new Bun("Ciabatta", 13, 0.45f, false, true, false, 41, 330));	
+		add(new Bun("Standard Bun", 10, 0.85f, classicVegetarian, 27, 90));
+		add(new Bun("Sesame Bun", 11, 0.95f, classicVegetarian, 28, 90));
+		add(new Bun("Vegan Bun", 12, 0.55f, vegan, 34, 240));
+		add(new Bun("Ciabatta", 13, 0.45f, vegan, 41, 330));	
 		
 		// Default Patties
-		add(new Patty("Standard Patty", 20, 1.85f, true, false, false, 25, 270));
-		add(new Patty("Grilled Chicken Patty", 21, 1.15f, false, false, false, 11, 180));
-		add(new Patty("Falafel Patty", 22, 1.45f, false, true, true, 21, 210));
-		add(new Patty("Veggie Patty", 23, 1.75f, false, true, false, 25, 240));
+		add(new Patty("Standard Patty", 20, 1.85f, classic, 25, 270));
+		add(new Patty("Grilled Chicken Patty", 21, 1.15f, none, 11, 180));
+		add(new Patty("Falafel Patty", 22, 1.45f, vegan, 21, 210));
+		add(new Patty("Veggie Patty", 23, 1.75f, vegetarian, 25, 240));
 		
 		// Default Salads
-		add(new Salad("Iceberg Salad", 30, 0.18f, true));
-		add(new Salad("Arugula Salad", 31, 0.25f, false));
+		add(new Salad("Iceberg Salad", 30, 0.18f, classicVegan));
+		add(new Salad("Arugula Salad", 31, 0.25f, vegan));
 		
 		// Default Vegetables
-		add(new Vegetable("Tomato", 40, 0.25f, true, 3, 3));
-		add(new Vegetable("Pickle", 41, 0.15f, true, 4, 2));
-		add(new Vegetable("Red Onion", 42, 0.08f, false, 5, 2));
-		add(new Vegetable("Jalapeno", 43, 0.08f, false, 5, 2));
+		add(new Vegetable("Tomato", 40, 0.25f, classicVegan, 3, 3));
+		add(new Vegetable("Pickle", 41, 0.15f, classicVegan, 4, 2));
+		add(new Vegetable("Red Onion", 42, 0.08f, vegan, 5, 2));
+		add(new Vegetable("Jalapeno", 43, 0.08f, vegan, 5, 2));
 		
 		// Default Sauces
-		add(new Sauce("Ketchup", 50, 0.10f, true, true, true, 5, 
-				Sauce.Flavor.normal));
-		add(new Sauce("Sandwich Sauce", 51, 0.15f, true, true, false, 10, 
-				Sauce.Flavor.normal));
-		add(new Sauce("Chili Sauce", 52, 0.25f, false, true, true, 8, 
-				Sauce.Flavor.hot));
-		add(new Sauce("Honey Mustard Sauce", 53, 0.18f, false, true, false, 8, 
-				Sauce.Flavor.sweet));
+		add(new Sauce("Ketchup", 50, 0.10f, classicVegan, 5, 
+					  Sauce.Flavor.normal));
+		add(new Sauce("Sandwich Sauce", 51, 0.15f, classicVegetarian, 10, 
+					  Sauce.Flavor.normal));
+		add(new Sauce("Chili Sauce", 52, 0.25f, vegan, 8, Sauce.Flavor.hot));
+		add(new Sauce("Honey Mustard Sauce", 53, 0.18f, vegetarian, 8, 
+				      Sauce.Flavor.sweet));
 	}
 	
 	/**
